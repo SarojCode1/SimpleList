@@ -142,57 +142,103 @@
 //     console.log("Click!");
 // })
 
+// var button = document.getElementById("enter");
+// var input = document.getElementById("userinput");
+// var ol = document.querySelector("ol");
+// // giving the function the length of tthe inpuut 
+// function inputLength(){
+//     return input.value.length;
+// }
+// // adding the entered item to the bottom of the list 
+// function createListElement(){
+//     var li = document.createElement("li");
+//     li.appendChild(document.createTextNode(input.value));
+//     ol.appendChild(li);
+//     input.value = "";
+// }
+// function addlistAfterClick(){
+//     if ( inputLength () > 0){
+//         createListElement();
+//     }
+// }
+// function addlistAfterKeypress(){
+//     if ( inputLength ()> 0 && event.keyCode === 13){
+//         createListElement();
+//     }
+// }
+//     button.addEventListener("click", addEventListener);
+//     input.addEventListener("keypress", addlistAfterKeypress);
+
 var button = document.getElementById("enter");
 var input = document.getElementById("userinput");
 var ol = document.querySelector("ol");
-// Select all existing li elements
-var existingLis = document.querySelectorAll("ol li");
-// giving the function the length of tthe inpuut 
-function inputLength(){
+var deleteButton = document.getElementById("delete-button");
+var lis = document.querySelectorAll("li");
+var currentItem = 0;
+
+
+// var li = document.getElementById("li")
+
+function inputLength() {
     return input.value.length;
 }
 
-// Iterate through the li elements
-existingLis.forEach(function(li) {
-    // Create a delete button
-    var deleteBtn = document.createElement("button");
-    deleteBtn.appendChild(document.createTextNode("Delete"));
-    // Append the delete button to the li element
-    li.appendChild(deleteBtn);
-    // Add an event listener to the delete button
-    deleteBtn.addEventListener("click", function(){
-        li.remove();
-    });
-});
-// adding the entered item to the bottom of the list 
-function createListElement(){
+function createListElement() {
     var li = document.createElement("li");
-    li.appendChild(document.createTextNode(input.value));
+    li.appendChild(document.createTextNode(input.value))
+    li.addEventListener("click", deleteListItem)
     ol.appendChild(li);
     input.value = "";
 }
-function createListElement(){
-    var li = document.createElement("li");
-    li.appendChild(document.createTextNode(input.value));
-    var deleteBtn = document.createElement("button");
-    deleteBtn.appendChild(document.createTextNode("Delete"));
-    li.appendChild(deleteBtn);
-    ol.appendChild(li);
-    input.value = "";
-    deleteBtn.addEventListener("click", function(){
-        li.remove();
-    });
-}
-function addlistAfterClick(){
-    if ( inputLength () > 0){
-        createListElement();
-    }
-}
-function addlistAfterKeypress(){
-    if ( inputLength ()> 0 && event.keyCode === 13){
-        createListElement();
-    }
-}
-    button.addEventListener("click", addEventListener);
-    input.addEventListener("keypress", addlistAfterKeypress);
 
+function deleteListItem() {
+    var li = this;
+    li.parentNode.removeChild(li);
+}
+// function deleteListElement (){
+//     var li = document.deleteElement("li");
+
+// }
+
+function addlistAfterClick() {
+    if (inputLength() > 0) {
+        createListElement();
+    }
+}
+
+for (var i = 0; i < lis.length; i++) {
+    lis[i].addEventListener("click", deleteListItem);
+}
+function deleteListItem() {
+    var items = document.querySelectorAll("li");
+    if (currentItem < items.length) {
+        items[currentItem].parentNode.removeChild(items[currentItem]);
+        currentItem++;
+    }
+}
+
+// function addlistAfterKeypress(){
+//     if( inputLength ()> 0 && event.keyCode == 13){
+//         createListElement();
+//     }
+// }
+
+// function addlistAfterClick(){
+//     if(inputLength () === 0) {
+//         deleteListElement();
+//     }
+// }
+
+// function deleteListElement (){
+//     var list = document.querySelector("ol");
+//     while (list.la) {
+//         list.removeChild(list.firstChild);
+//     }
+// }
+
+// addlistAfterClick();
+
+
+button.addEventListener("click", addlistAfterClick);
+// input.addEventListener("keypress", addlistAfterKeypress);
+// deleteButton.addEventListener("click", deleteListElement);
